@@ -19,7 +19,7 @@ export type TodoItemProps = {
 };
 
 export type TodoHandlerProps = {
-  toggleTodo: (id: string, completed: boolean) => void;
+  toggleTodoCompleted: (id: string, completed: boolean) => void;
   deleteToDo: (id: string) => void;
 };
 

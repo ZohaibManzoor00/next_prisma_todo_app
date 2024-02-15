@@ -10,10 +10,8 @@ export default function NewTodo() {
     "use server";
 
     const title = data.get("title")?.valueOf();
-    
-    if (typeof title !== "string" || title.length === 0) {
-      throw new Error("Invalid Title");
-    }
+
+    if (typeof title !== "string" || title.length === 0) return "No input";
 
     await createTodo({ title, completed: false });
     redirect("/todo");
