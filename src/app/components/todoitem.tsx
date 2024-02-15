@@ -1,8 +1,8 @@
 'use client'
 
-import { TodoItemProps } from "../types/todoTypes";
+import { TodoProps } from "../types/todoTypes";
 
-export default function TodoItem({ id, title, completed, toggleTodo, deleteToDo}: TodoItemProps) {
+export default function TodoItem({ id, title, completed, toggleTodo, deleteToDo }: TodoProps) {
   return (
     <li className="flex gap-1 items-center py-4">
       <input id={id} type="checkbox" className="cursor-pointer peer" 

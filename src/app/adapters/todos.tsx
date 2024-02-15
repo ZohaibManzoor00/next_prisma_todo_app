@@ -1,9 +1,9 @@
 import { prisma } from "@/db";
-import { CreateTodoProps, ToggleTodoProps, DeleteTodoProps } from "../types/todoTypes";
+import { CreateTodoProps, ToggleTodoProps, DeleteTodoProps, TodoItemProps } from "../types/todoTypes";
 
-const getTodos = async () => await prisma.todo.findMany({ orderBy: {createdAt: 'desc'}})
+const getTodos = async (): Promise<TodoItemProps[]> => await prisma.todo.findMany({ orderBy: {createdAt: 'desc'}})
 
-const createTodo = async (data: CreateTodoProps) => await prisma.todo.create({ data })
+const createTodo = async (data: CreateTodoProps): Promise<TodoItemProps> => await prisma.todo.create({ data })
 
 const toggleTodo = async (data: ToggleTodoProps) => {
     const { id, completed } = data 

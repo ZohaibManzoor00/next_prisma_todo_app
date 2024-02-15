@@ -16,6 +16,12 @@ export type TodoItemProps = {
   id: string;
   title: string;
   completed: boolean;
+};
+
+export type TodoHandlerProps = {
   toggleTodo: (id: string, completed: boolean) => void;
   deleteToDo: (id: string) => void;
 };
+
+export interface TodoProps extends TodoItemProps, TodoHandlerProps {}
+
