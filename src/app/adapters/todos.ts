@@ -1,25 +1,33 @@
-import { prisma } from "@/db";
 import {
   CreateTodoProps,
   ToggleTodoProps,
   DeleteTodoProps,
   TodoItemProps,
 } from "../types/todoTypes";
+import { queryHandler } from "../todo/handlers";
+
 
 const getTodos = async (): Promise<TodoItemProps[]> => {
-    return await prisma.todo.findMany({ orderBy: { createdAt: "desc" } });
+  const todos = await queryHandler("todo", "findMany", { orderBy: { createdAt: "desc" } });
+  return todos;
 };
 
 const createTodo = async (data: CreateTodoProps): Promise<TodoItemProps> => {
-  return await prisma.todo.create({ data });
+  const newlyCreatedTodo = await queryHandler('todo', 'create', { data })
+  return newlyCreatedTodo
 };
 
-const toggleTodo = async ({ id, completed }: ToggleTodoProps): Promise<TodoItemProps> => {
-  return await prisma.todo.update({ where: { id }, data: { completed } });
+const toggleTodo = async ({
+  id,
+  completed,
+}: ToggleTodoProps): Promise<TodoItemProps> => {
+  const toggledTodo = await queryHandler('todo', 'update', { where: { id }, data: { completed } })
+  return toggledTodo
 };
 
 const deleteTodo = async ({ id }: DeleteTodoProps): Promise<TodoItemProps> => {
-  return await prisma.todo.delete({ where: { id } });
+  const deletedTodo = await queryHandler('todo', 'delete', { where: id })
+  return deletedTodo
 };
 
 export { getTodos, createTodo, toggleTodo, deleteTodo };
