@@ -26,7 +26,7 @@ const toggleTodo = async ({
 };
 
 const deleteTodo = async ({ id }: DeleteTodoProps): Promise<TodoItemProps> => {
-  const deletedTodo = await queryHandler('todo', 'delete', { where: id })
+  const deletedTodo = await queryHandler('todo', 'delete', { where: { id } })
   return deletedTodo
 };
 
