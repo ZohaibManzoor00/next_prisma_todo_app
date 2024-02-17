@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from "./components/navbar";
 import "./globals.css";
 
@@ -16,6 +17,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
           <div className="z-10 max-w-5xl w-full items-center justify-between text-sm">
             <Navbar />
             {children}
+            <SpeedInsights />
           </div>
         </main>
       </body>
