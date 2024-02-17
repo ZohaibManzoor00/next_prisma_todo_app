@@ -1,4 +1,5 @@
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { toggleTodo, deleteTodo, getTodos } from "../adapters/todos";
 import { TodoItemProps } from "../types/todoTypes";
 import { PrismaClient } from "@prisma/client";
@@ -12,13 +13,13 @@ const getAllTodos = async (): Promise<TodoItemProps[]> => {
 const toggleTodoCompleted = async (id: string, completed: boolean): Promise<void> => { 
   "use server";
   await toggleTodo({ id, completed });
-  redirect('/todo')
+  revalidatePath('/todo')
 };
 
 const deleteATodo = async (id: string): Promise<void> => {  
   "use server";
   await deleteTodo({ id });
-  redirect("/todo");
+  revalidatePath("/todo");
 };
 
 const queryHandler = async <T extends keyof PrismaClient>(
