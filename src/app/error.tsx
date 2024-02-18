@@ -1,6 +1,6 @@
 "use client";
 
-export default function ErrorDisplay({ error, retry }: { error: any; retry: any }) {
+export default function ErrorBoundary({ error, retry }: { error: any; retry: any }) {
   return (
     <>
       <h1>{error}</h1>

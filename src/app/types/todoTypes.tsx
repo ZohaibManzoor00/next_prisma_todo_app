@@ -18,10 +18,14 @@ export type TodoItemProps = {
   completed: boolean;
 };
 
+export interface DeleteResponse {
+  deletedTodo?: TodoItemProps;
+  msg: string | unknown;
+}
+
 export type TodoHandlerProps = {
   toggleTodoCompleted: (id: string, completed: boolean) => void;
-  deleteToDo: (id: string) => void;
+  deleteATodo: (id: string) => Promise<TodoItemProps | DeleteResponse>
 };
 
 export interface TodoProps extends TodoItemProps, TodoHandlerProps {}
-

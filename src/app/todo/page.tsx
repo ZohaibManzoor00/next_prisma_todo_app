@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import TodoItem from "../components/todoitem";
-import { toggleTodoCompleted, deleteATodo } from "./handlers";
-import { getAllTodos } from "./handlers";
+import { getAllTodos, toggleTodoCompleted } from "./handlers";
+import { deleteTodo } from "../adapters/todos";
 
 export default async function TodoPage() {
   const todos = await getAllTodos();
@@ -14,7 +14,7 @@ export default async function TodoPage() {
             key={todo.id}
             {...todo}
             toggleTodoCompleted={toggleTodoCompleted}
-            deleteToDo={deleteATodo}
+            deleteATodo={deleteTodo}
           />
         ))}
       </Suspense>
