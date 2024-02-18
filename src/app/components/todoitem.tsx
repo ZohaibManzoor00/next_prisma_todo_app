@@ -7,16 +7,20 @@ export default function TodoItem({
   title,
   completed,
   toggleTodoCompleted,
-  deleteToDo,
+  deleteATodo,
 }: TodoProps) {
   const handleCheckbox = async (
     e: React.ChangeEvent<HTMLInputElement>
   ): Promise<void> => {
     return toggleTodoCompleted(id, e.target.checked);
   };
-
-  const handleDeleteBtn = (): void => {
-    return deleteToDo(id);
+  const handleDeleteBtn = async (): Promise<void> => {
+    try {
+      const res = await deleteATodo(id);
+      console.log(res);
+    } catch (err: any) {
+      throw new Error(err)
+    }
   };
 
   return (

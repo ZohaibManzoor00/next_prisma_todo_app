@@ -18,11 +18,11 @@ const toggleTodoCompleted = async (
   revalidateTag("todo");
 };
 
-const deleteATodo = async (id: string): Promise<void> => {
-  "use server";
-  await deleteTodo({ id });
-  revalidateTag("todo");
-};
+// const deleteATodo = async (id: string): Promise<void> => {
+//   "use server";
+//   await deleteTodo({ id });
+//   revalidateTag("todo");
+// };
 
 const dbQueryHandler = async <T extends keyof PrismaClient>(
   model: T,
@@ -47,4 +47,4 @@ const dbQueryHandler = async <T extends keyof PrismaClient>(
   }
 };
 
-export { toggleTodoCompleted, deleteATodo, getAllTodos, dbQueryHandler };
+export { toggleTodoCompleted, getAllTodos, dbQueryHandler };

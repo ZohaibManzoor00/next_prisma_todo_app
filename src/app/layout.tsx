@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from "./components/navbar";
 import "./globals.css";
+import ErrorDisplay from "./todo/error";
 
 const inter = Inter({ subsets: ["latin"] });
 
