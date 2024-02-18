@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { createTodo } from "../adapters/todos";
 import NavLink from "../components/nav-link";
 
@@ -15,7 +15,8 @@ export default function NewTodo() {
     if (typeof title !== "string" || title.length === 0) return "No input";
 
     await createTodo({ title, completed: false });
-    revalidatePath("/todo");
+    revalidateTag("todo");
+    redirect("/todo");
   };
 
   return (
