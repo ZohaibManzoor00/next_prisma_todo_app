@@ -2,13 +2,13 @@
 import {
   CreateTodoProps,
   ToggleTodoProps,
-  DeleteTodoProps,
   TodoItemProps,
   DeleteResponse,
 } from "../types/todoTypes";
 import { dbQueryHandler } from "../todo/handlers";
 import { revalidateTag, unstable_cache } from "next/cache";
 import { prisma } from "@/db";
+import { DeleteError } from "../lib/exceptions";
 
 const getTodos = unstable_cache(
   async (): Promise<Array<TodoItemProps>> => {
@@ -41,15 +41,15 @@ const toggleTodo = async ({
 
 const deleteTodo = async (
   id: string
-): Promise<TodoItemProps | DeleteResponse> => {
+): Promise<DeleteResponse> => {
   try {
-    // await dbQueryHandler("todo", "delete", { where: { id } });
+    const num = Math.floor(Math.random() * 2) + 1;
+    if (num === 1) throw new DeleteError();
     await prisma.todo.delete({ where: { id } });
-    revalidateTag("todo");
+    revalidateTag("todo"); 
     return { msg: "Successfully Deleted Todo" };
   } catch (err: unknown) {
-    console.log(err);
-    return { msg: err || 'An error has occurred' };
+    return { error: err instanceof Error ? err.message : 'An error has occurred' }
   }
 };
 

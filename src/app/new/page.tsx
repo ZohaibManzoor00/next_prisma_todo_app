@@ -26,6 +26,7 @@ export default function NewTodo() {
           type="text"
           name="title"
           placeholder="What's next?"
+          autoFocus={true}
           className={btnStyle}
         />
         <label htmlFor="title"></label>
