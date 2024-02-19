@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "@nextui-org/react";
 
 export default function ErrorBoundary({
   error,
@@ -11,30 +12,26 @@ export default function ErrorBoundary({
 }) {
   const [retryTimes, setRetryTimes] = useState(0);
 
-  const btnStyle =
-    "border border-slate-300 hover:bg-slate-700 bg-transparent rounded px-2 py-1 outline-none focus-within:border-slate-100";
-
   return (
     <>
       {/* <h1>Error: {error}</h1> */}
       {/* For testing */}
       {/* Retries: {retryTimes} */}
       <div>
-        {retryTimes < 2 ? (
-          <>
-            <button
-              className={btnStyle}
-              onClick={() => {
-                retry();
-                setRetryTimes((prev) => prev + 1);
-              }}
-            >
-              Retry?
-            </button>
-          </>
-        ) : (
-          <>Try again later</>
-        )}
+        <Button
+          color={retryTimes > 1 ? "default" : "warning"}
+          radius="full"
+          size="sm"
+          variant="ghost"
+          isDisabled={retryTimes > 1}
+          onPress={() => {
+            retry();
+            // Delete after
+            setRetryTimes((prev) => prev + 1);
+          }}
+        >
+          {retryTimes > 1 ? "Try Later" : "Retry"}
+        </Button>
       </div>
     </>
   );

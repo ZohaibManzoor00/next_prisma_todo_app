@@ -16,6 +16,7 @@ export type TodoItemProps = {
   id: string;
   title: string;
   completed: boolean;
+  createdAt: Date;
 };
 
 export interface DeleteResponse {
