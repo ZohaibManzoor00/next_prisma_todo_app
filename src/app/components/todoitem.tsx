@@ -13,7 +13,13 @@ import {
 } from "@nextui-org/react";
 import { toast } from "react-hot-toast";
 import { DateTime } from "luxon";
+import { DeleteError } from "../lib/exceptions";
 
+type ErrorType = {
+  message: string;
+  code?: number;
+  name?: string;
+};
 export default function TodoItem({
   id,
   title,
@@ -22,14 +28,16 @@ export default function TodoItem({
   deleteATodo,
   createdAt,
 }: TodoProps) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState<Error>({ message: "", name: "" });
 
   const handleDeleteBtn = async () => {
     const res = await deleteATodo(id);
     if (res?.error) {
       toast.error(String(res.error));
-      setError(String(res.error));
-      return;
+      const err = new Error(String(res.error));
+      setError(err);
+      return 
+      // throw new DeleteError("Sorry pal");
     }
     toast("Keep it up!", {
       duration: 1500,
@@ -48,13 +56,14 @@ export default function TodoItem({
         <CardHeader className="justify-between">
           <div className="flex gap-5"></div>
           <Button
-            color="primary"
+            className="hover:bg-opacity-20"
+            color={completed ? "success" : "primary"}
             radius="full"
             size="sm"
-            variant={completed ? "ghost" : "solid"}
+            variant={completed ? "solid" : "ghost"}
             onPress={() => toggleTodoCompleted(id, !completed)}
           >
-            {completed ? "Complete" : "Completed"}
+            {completed ? "Completed" : "Mark Complete"}
           </Button>
         </CardHeader>
         <CardBody className="px-3 py-0 text-small text-default-600">
@@ -62,12 +71,11 @@ export default function TodoItem({
         </CardBody>
         <CardFooter className="gap-3 flex items-center justify-between">
           <div className="flex gap-1">
-            <p className="font-semibold text-default-400 text-small">4</p>
+            <p className="font-semibold text-default-400 text-small">2</p>
             <p className=" text-default-400 text-small">Hours ago</p>
           </div>
-
-          {error ? (
-            <ErrorBoundary error={error} retry={handleDeleteBtn} />
+          {error.message ? (
+            <ErrorBoundary error={error} reset={handleDeleteBtn} />
           ) : (
             <Button
               color="danger"
