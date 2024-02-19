@@ -7,8 +7,8 @@ export default async function TodoPage() {
   const todos = await getAllTodos();
 
   return (
-    <div className="grid place-content-center">
-      <Suspense fallback={<h1 className="text-lg">Loading todos ...</h1>}>
+    <Suspense fallback={<h1 className="text-lg">Loading todos ...</h1>}>
+      <div className="grid place-content-center">
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -17,7 +17,7 @@ export default async function TodoPage() {
             deleteATodo={deleteTodo}
           />
         ))}
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from "./components/navbar";
 import "./globals.css";
-import ErrorDisplay from "./todo/error";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +21,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
             <SpeedInsights />
           </div>
         </main>
+        <Toaster position="top-right"/>
       </body>
     </html>
   );
