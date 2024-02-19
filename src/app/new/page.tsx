@@ -31,7 +31,7 @@ export default function NewTodo() {
         />
         <label htmlFor="title"></label>
         <div className="flex justify-center gap-2 py-3">
-          <NavLink to={"/"} name="Cancel" styles={btnStyle} />
+          <NavLink to={"/todo"} name="Cancel" styles={btnStyle} />
           <button className={btnStyle} type="submit">
             Submit
           </button>
