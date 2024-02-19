@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import TodoItem from "../components/todoitem";
 import { getAllTodos, toggleTodoCompleted } from "./handlers";
 import { deleteTodo } from "../adapters/todos";
